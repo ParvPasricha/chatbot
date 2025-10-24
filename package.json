@@ -1,0 +1,22 @@
+{
+  "name": "enterprise-chatbot-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "app/shared",
+    "app/gateway",
+    "app/auth",
+    "app/tenants",
+    "app/ingestion",
+    "app/orchestrator",
+    "app/tools/*",
+    "app/dashboard",
+    "app/widget"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "test": "npm run test --workspaces",
+    "dev": "npm run dev --workspace app/gateway"
+  }
+}

@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  gateway:
+    build:
+      context: ../..
+      dockerfile: app/gateway/Dockerfile
+    environment:
+      - PORT=4000
+      - TENANT_SERVICE_URL=http://tenants:4200
+      - ORCHESTRATOR_URL=http://orchestrator:4100
+      - AUTH_SERVICE_URL=http://auth:4300
+      - TOOLS_SERVICE_URL=http://tools:4500
+    ports:
+      - '4000:4000'
+    depends_on:
+      - orchestrator
+      - tenants
+  orchestrator:
+    build:
+      context: ../..
+      dockerfile: app/orchestrator/Dockerfile
+    environment:
+      - ORCHESTRATOR_URL=http://orchestrator:4100
+      - TOOLS_SERVICE_URL=http://tools:4500
+    ports:
+      - '4100:4100'
+  tenants:
+    build:
+      context: ../..
+      dockerfile: app/tenants/Dockerfile
+    environment:
+      - TENANT_SERVICE_URL=http://tenants:4200
+    ports:
+      - '4200:4200'
+  auth:
+    build:
+      context: ../..
+      dockerfile: app/auth/Dockerfile
+    environment:
+      - AUTH_SERVICE_URL=http://auth:4300
+    ports:
+      - '4300:4300'
+  ingestion:
+    build:
+      context: ../..
+      dockerfile: app/ingestion/Dockerfile
+    environment:
+      - INGESTION_SERVICE_URL=http://ingestion:4400
+    ports:
+      - '4400:4400'
+  tools:
+    build:
+      context: ../..
+      dockerfile: app/tools/Dockerfile
+    environment:
+      - TOOLS_SERVICE_URL=http://tools:4500
+    ports:
+      - '4500:4500'

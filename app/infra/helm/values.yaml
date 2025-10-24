@@ -1,0 +1,10 @@
+image:
+  repository: chatbot/gateway
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+env:
+  TENANT_SERVICE_URL: "http://tenants"
+  ORCHESTRATOR_URL: "http://orchestrator"

@@ -1,0 +1,2 @@
+FROM semitechnologies/weaviate:1.24.4
+ENV AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED="true"

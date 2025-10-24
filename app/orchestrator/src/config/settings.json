@@ -1,0 +1,7 @@
+{
+  "defaultModel": "gpt-4-turbo",
+  "fallbackModel": "gpt-3.5-turbo",
+  "maxContextMessages": 12,
+  "confidenceThreshold": 0.65,
+  "sentimentTool": true
+}

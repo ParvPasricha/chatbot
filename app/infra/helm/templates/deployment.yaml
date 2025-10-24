@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chatbot-platform.fullname" . }}
+  labels:
+    app: {{ include "chatbot-platform.name" . }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ include "chatbot-platform.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "chatbot-platform.name" . }}
+    spec:
+      containers:
+        - name: gateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 4000
+          env:
+            - name: TENANT_SERVICE_URL
+              value: {{ .Values.env.TENANT_SERVICE_URL }}
+            - name: ORCHESTRATOR_URL
+              value: {{ .Values.env.ORCHESTRATOR_URL }}
